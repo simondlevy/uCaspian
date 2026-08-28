@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-import binascii
-import time
 from serial import Serial
-from test_func import *
+from test_func import (get_metric, get_resp, get_resp_until_timeout,
+                       send_clear_act, send_clear_cfg, send_fire,
+                       send_ncfg, send_step)
 
-#with Serial('/dev/serial0', 115200, timeout=0.33) as ser:
 with Serial('/dev/ttyUSB0', 3000000, timeout=0.33) as ser:
     print('Clear Configuration')
     send_clear_cfg(ser)
@@ -18,7 +17,7 @@ with Serial('/dev/ttyUSB0', 3000000, timeout=0.33) as ser:
     for n in range(7):
         send_fire(ser, n, 100)
         send_step(ser, 2)
-        get_resp(ser, 7) # time update & fire output
+        get_resp(ser, 7)  # time update & fire output
 
     send_step(ser, 63)
     get_resp(ser, 5)
