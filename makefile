@@ -49,7 +49,7 @@ UCASPIANLP_TOP_RTL = $(STREAM_UART_RTL)
 CPP_SOURCES = $(wildcard $(SRC)/*.cpp)
 
 # Select the board
-USB_DEV ?= 1-1.4:1.0
+USB_DEV ?= 1-12:1.0
 BOARD ?= upduino
 
 # Device parameters
