@@ -134,9 +134,6 @@ You also need to be added to the `dialout` group.
     cd ucaspian/tests
     # In framework/processors/caspian/ucaspsian/tests
     python3 a.py
-    python3 b.py
-    python3 c.py
-    python3 d.py
 
     ```
 
