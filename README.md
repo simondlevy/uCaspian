@@ -157,7 +157,16 @@ You also need to be added to the `dialout` group.
 
     ```
 
-11. To configure the caspian processor to run using hardware, add `{"Backend": "uCaspian_USB"}` to the caspian config.
+10. Try out different networks on the board:
+
+    ```bash
+    # In framework/processors/caspian/ucaspsian/tests
+    python3 a.py
+    python3 b.py
+    python3 c.py
+    python3 d.py
+
+    ```
 
 ## Notes on SPI Versions
 

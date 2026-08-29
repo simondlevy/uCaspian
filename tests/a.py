@@ -2,8 +2,7 @@
 import neuro
 import caspian
 
-#p = caspian.Processor({})
-p = caspian.Processor({"Backend": "uCaspian_Verilator", "Verilator": {"Trace_File": "a.fst"}})
+p = caspian.Processor({"Backend": "uCaspian_USB", "Verilator": {"Trace_File": "a.fst"}})
 
 net = neuro.Network()
 net.set_properties(p.get_network_properties())
