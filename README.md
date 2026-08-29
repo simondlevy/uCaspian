@@ -2,7 +2,10 @@
 
 [![DOI](https://zenodo.org/badge/1165143730.svg)](https://doi.org/10.5281/zenodo.18750589)
 
-"micro-caspian" can be thought of as a neuromorphic equivalent of a microcontroller. This is a small design with a minimal feature set and limited performance designed for low cost, low power embedded applications. The target FPGA is the Lattice ice40UP5k.
+"micro-caspian" can be thought of as a neuromorphic equivalent of a
+microcontroller. This is a small design with a minimal feature set and limited
+performance designed for low cost, low power embedded applications. The target
+FPGA is the Lattice ice40UP5k.
 
 A few details:
 
@@ -16,7 +19,9 @@ A few details:
 
 ## Installing Open-Source Toolchain
 
-You can either install the [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build) or use the experimental [Conda EDA](https://github.com/hdl/conda-eda) environment.
+You can either install the [OSS CAD
+Suite](https://github.com/YosysHQ/oss-cad-suite-build) or use the experimental
+[Conda EDA](https://github.com/hdl/conda-eda) environment.
 
 ### Install OSS CAD Suite (Required)
 
@@ -35,7 +40,9 @@ You can either install the [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-su
 
 ### Anaconda environment (Experimental)
 
-As an alternative to the OSS CAD suite you can use the Conda EDA environment which includes Verible and many of the other open-source EDA tools used in the [ORNL NeuroHW](https://code.ornl.gov/neurohw) ecosystem.
+As an alternative to the OSS CAD suite you can use the Conda EDA environment
+which includes Verible and many of the other open-source EDA tools used in the
+[ORNL NeuroHW](https://code.ornl.gov/neurohw) ecosystem.
 
 ```bash
 conda env create -f environment.yml
@@ -44,11 +51,14 @@ conda activate ucaspian
 
 ### Install Verible (Optional)
 
-If you did not use the experimental Anaconda environment you may also want to install [Verible](https://github.com/chipsalliance/verible). Verible has useful SystemVerilog linting and formatting tools.
+If you did not use the experimental Anaconda environment you may also want to
+install [Verible](https://github.com/chipsalliance/verible). Verible has useful
+SystemVerilog linting and formatting tools.
 
   1. Navigate to project repository. <https://github.com/chipsalliance/verible>
 
-  2. Download release and extract to home directory. The release has bin and share which are both extracted to `~/bin` and `~/share` respectively.
+  2. Download release and extract to home directory. The release has bin and
+     share which are both extracted to `~/bin` and `~/share` respectively.
 
 ### Install libftdi
 
@@ -110,7 +120,10 @@ You also need to be added to the `dialout` group.
     ...
 
     ```
-    Update the `USB_DEV` variable in the makefile with the device ID for your board. This allows the script to automatically bind the USB device driver to the FPGA device without requiring the device cable to be disconnected and reconnected.
+    Update the `USB_DEV` variable in processors/caspian/ucaspian/makefile with
+    the device ID for your board. This allows the script to automatically bind the
+    USB device driver to the FPGA device without requiring the device cable to
+    be disconnected and reconnected.
 
 7. Build and load ucaspian FPGA image on the [UPduino](https://tinyvision.ai/products/upduino-v3-1) board.
 
@@ -119,9 +132,11 @@ You also need to be added to the `dialout` group.
     make upduino_uart_top.flash
     ```
 
-    For additional designs see `make help`. Not all designs currently meet timing and will fail during place and route. These designs should not be used.
+    For additional designs see `make help`. Not all designs currently meet
+    timing and will fail during place and route. These designs should not be used.
 
-8. Run test python script to test connection to FPGA. You should see output data and see the LED on the FPGA blink.
+8. Run test python script to test connection to FPGA. You should see output
+   data and see the LED on the FPGA blink.
 
     ```bash
     # In framework/processors/caspian/ucaspian
