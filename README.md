@@ -160,6 +160,7 @@ You also need to be added to the `dialout` group.
 10. Try out different networks on the board:
 
     ```bash
+    cd ucaspian/tests
     # In framework/processors/caspian/ucaspsian/tests
     python3 a.py
     python3 b.py
