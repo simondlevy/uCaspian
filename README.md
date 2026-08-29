@@ -80,13 +80,13 @@ You also need to be added to the `dialout` group.
 2. Clone Caspian to processors/caspian.
 
     ```bash
-    git clone github.com/simondlevy/caspian ./processors/caspian
+    git clone https://github.com/simondlevy/caspian ./processors/caspian
     ```
 
 3. Clone µCaspian to processors/caspian/ucaspian.
 
     ```bash
-    git clone github.com/simondlevy/ucaspian ./processors/caspian/ucaspian
+    git clone https://github.com/simondlevy/ucaspian ./processors/caspian/ucaspian
     ```
 
 4. Build the framework environment.
