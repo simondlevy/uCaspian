@@ -128,12 +128,12 @@ You also need to be added to the `dialout` group.
 
     ```
 
-10. Try out different networks on the board:
+10. Try an example network on the board:
 
     ```bash
-    cd ucaspian/tests
-    # In framework/processors/caspian/ucaspsian/tests
-    python3 a.py
+    cd ucaspian/scripts
+    # In framework/processors/caspian/ucaspian/scripts
+    python3 example.py
 
     ```
 

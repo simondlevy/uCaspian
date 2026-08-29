@@ -2,41 +2,30 @@
 import neuro
 import caspian
 
+NETWORK_FILE = "example.txt"
+
 p = caspian.Processor({"Backend": "uCaspian_USB", "Verilator": {"Trace_File": "a.fst"}})
 
 net = neuro.Network()
-net.set_properties(p.get_network_properties())
+
+try:
+    net.read_from_file(NETWORK_FILE)
+except Exception:
+    print('Unable to read from ' + NETWORK_FILE)
+    exit(1)
+
 
 prefix = 0
 a = prefix
 b = prefix + 1
 
-for i in range(prefix):
-    net.add_node(i)
-    net.get_node(i).set("Threshold", 0)
-    net.get_node(i).set("Delay", 0)
-
-net.add_node(a)
-net.add_node(b)
-net.add_edge(a, b)
-
-net.get_node(a).set("Threshold", 10)
-net.get_node(b).set("Threshold", 10)
-net.get_edge(a, b).set("Weight", 11)
-
-net.get_node(a).set("Delay", 15)
-net.get_node(b).set("Delay", 0)
-
-for i in range(prefix+2):
-    net.set_input(i, i)
-    net.set_output(i, i)
-
 p.load_network(net)
+
 
 for i in range(prefix+2):
     p.track_output_events(i)
 
-# Fires
+# Inputs
 p.apply_spike(neuro.Spike(time=0, id=a, value=1))
 p.apply_spike(neuro.Spike(time=5, id=a, value=1))
 p.apply_spike(neuro.Spike(time=10, id=a, value=1))
