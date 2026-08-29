@@ -114,7 +114,7 @@ You also need to be added to the `dialout` group.
 
     ```bash
     pip install pyserial
-    python scripts/basic_test.py
+    python3 scripts/basic_test.py
     ```
 
 9. Run caspian passthrough test. You should see output which matches `./bin/pass_bench sim 5 5 10`.
