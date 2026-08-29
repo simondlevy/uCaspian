@@ -42,17 +42,9 @@ def main():
     run(sim, neurons, sim_time)
     print("")
 
-    # hwsim = caspian.Processor({"Backend": "uCaspian_Verilator", "Verilator": {"Trace_File": "a.fst"}})
-    hwsim = caspian.Processor({"Backend": "uCaspian_Verilator"})
-    print("Verilator")
-    run(hwsim, neurons, sim_time)
-    print('')
-
-    """
     hw = caspian.Processor({"Backend": "uCaspian_USB"})
     print("HW")
     run(hw, neurons, sim_time)
-    """
 
 
 if __name__ == "__main__":
