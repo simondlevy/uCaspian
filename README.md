@@ -101,6 +101,7 @@ You also need to be added to the `dialout` group.
 7. Build and load ucaspian FPGA image on the [UPduino](https://tinyvision.ai/products/upduino-v3-1) board.
 
     ```bash
+    cd processors/caspian/ucaspian
     # In framework/processors/caspian/ucaspian
     make upduino_uart_top.flash
     ```
@@ -112,10 +113,7 @@ You also need to be added to the `dialout` group.
    data and see the LED on the FPGA blink.
 
     ```bash
-    # In framework/processors/caspian/ucaspian
-
     pip install pyserial
-
     python scripts/basic_test.py
     ```
 
