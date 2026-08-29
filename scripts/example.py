@@ -4,7 +4,7 @@ import caspian
 
 NETWORK_FILE = "example.txt"
 
-p = caspian.Processor({"Backend": "uCaspian_USB", "Verilator": {"Trace_File": "a.fst"}})
+p = caspian.Processor({"Backend": "uCaspian_USB", })
 
 net = neuro.Network()
 
@@ -14,24 +14,18 @@ except Exception:
     print('Unable to read from ' + NETWORK_FILE)
     exit(1)
 
-
-prefix = 0
-a = prefix
-b = prefix + 1
-
 p.load_network(net)
 
-
-for i in range(prefix+2):
-    p.track_output_events(i)
+p.track_output_events(0)
+p.track_output_events(1)
 
 # Inputs
-p.apply_spike(neuro.Spike(time=0, id=a, value=1))
-p.apply_spike(neuro.Spike(time=5, id=a, value=1))
-p.apply_spike(neuro.Spike(time=10, id=a, value=1))
-p.apply_spike(neuro.Spike(time=20, id=a, value=1))
+p.apply_spike(neuro.Spike(time=0, id=0, value=1))
+p.apply_spike(neuro.Spike(time=5, id=0, value=1))
+p.apply_spike(neuro.Spike(time=10, id=0, value=1))
+p.apply_spike(neuro.Spike(time=20, id=0, value=1))
 
 p.run(50)
 
-for i in range(prefix, prefix+2):
-    print(i, p.output_vector(i))
+print(0, p.output_vector(0))
+print(1, p.output_vector(1))
