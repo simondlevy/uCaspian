@@ -4,7 +4,7 @@ import caspian
 
 def run(p):
     net = neuro.Network()
-    net.set_properties(p.get_properties())
+    net.set_properties(p.get_network_properties())
 
     neurons = 100
     sim_time = 10
