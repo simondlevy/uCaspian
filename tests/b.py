@@ -4,7 +4,7 @@ import caspian
 
 def run(p, neurons, sim_time):
     net = neuro.Network()
-    net.set_properties(p.get_properties())
+    net.set_properties(p.get_network_properties())
     
     for n in range(neurons):
         net.add_node(n)
@@ -23,7 +23,7 @@ def run(p, neurons, sim_time):
     p.load_network(net)
     
     for i in range(neurons):
-        p.track_output(i)
+        p.track_output_events(i)
     
     # Fires
     p.apply_spike(neuro.Spike(time=0, id=0, value=1))
