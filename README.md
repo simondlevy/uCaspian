@@ -120,7 +120,7 @@ You also need to be added to the `dialout` group.
     ...
 
     ```
-    Update the `USB_DEV` variable in processors/caspian/ucaspian/makefile with
+    Update the `USB_DEV` variable in `processors/caspian/ucaspian/makefile` with
     the device ID for your board. This allows the script to automatically bind the
     USB device driver to the FPGA device without requiring the device cable to
     be disconnected and reconnected.
