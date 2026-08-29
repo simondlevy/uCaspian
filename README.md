@@ -38,28 +38,6 @@ Suite](https://github.com/YosysHQ/oss-cad-suite-build) or use the experimental
       source <extracted_location>/oss-cad-suite/environment
       ```
 
-### Anaconda environment (Experimental)
-
-As an alternative to the OSS CAD suite you can use the Conda EDA environment
-which includes Verible and many of the other open-source EDA tools used in the
-[ORNL NeuroHW](https://code.ornl.gov/neurohw) ecosystem.
-
-```bash
-conda env create -f environment.yml
-conda activate ucaspian
-```
-
-### Install Verible (Optional)
-
-If you did not use the experimental Anaconda environment you may also want to
-install [Verible](https://github.com/chipsalliance/verible). Verible has useful
-SystemVerilog linting and formatting tools.
-
-  1. Navigate to project repository. <https://github.com/chipsalliance/verible>
-
-  2. Download release and extract to home directory. The release has bin and
-     share which are both extracted to `~/bin` and `~/share` respectively.
-
 ### Install libftdi
 
 On Ubuntu:
@@ -77,11 +55,6 @@ You also need to be added to the `dialout` group.
 
 1. Clone the neuromorphic framework.
 
-    ```bash
-    git clone git@code.ornl.gov:neuromorphic-computing/framework.git
-    cd framework
-    ```
-    or
     ```bash
     git clone git@bitbucket.org:neuromorphic-utk/framework.git
     cd framework
