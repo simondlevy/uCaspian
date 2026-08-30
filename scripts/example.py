@@ -4,8 +4,6 @@ import caspian
 
 NETWORK_FILE = "example.txt"
 
-p = caspian.Processor({"Backend": "uCaspian_USB", })
-
 net = neuro.Network()
 
 try:
@@ -13,6 +11,8 @@ try:
 except Exception:
     print('Unable to read from ' + NETWORK_FILE)
     exit(1)
+
+p = caspian.Processor({"Backend": "uCaspian_USB"})
 
 p.load_network(net)
 
