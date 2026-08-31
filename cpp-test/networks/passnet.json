@@ -1,0 +1,297 @@
+{
+  "config": {
+    "max_axon_delay": 0,
+    "max_syn_delay": 0,
+    "max_threshold": 255,
+    "soft_reset": false
+  },
+  "inputs": [
+    0,
+    5,
+    10,
+    15,
+    20
+  ],
+  "neurons": [
+    {
+      "delay": 0,
+      "id": 0,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 1,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 2,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 3,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 4,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 5,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 6,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 7,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 8,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 9,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 10,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 11,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 12,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 13,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 14,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 15,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 16,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 17,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 18,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 19,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 20,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 21,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 22,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 23,
+      "leak": -1,
+      "threshold": 1
+    },
+    {
+      "delay": 0,
+      "id": 24,
+      "leak": -1,
+      "threshold": 1
+    }
+  ],
+  "outputs": [
+    4,
+    9,
+    14,
+    19,
+    24
+  ],
+  "synapses": [
+    {
+      "delay": 0,
+      "from": 0,
+      "to": 1,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 1,
+      "to": 2,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 2,
+      "to": 3,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 3,
+      "to": 4,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 5,
+      "to": 6,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 6,
+      "to": 7,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 7,
+      "to": 8,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 8,
+      "to": 9,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 10,
+      "to": 11,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 11,
+      "to": 12,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 12,
+      "to": 13,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 13,
+      "to": 14,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 15,
+      "to": 16,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 16,
+      "to": 17,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 17,
+      "to": 18,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 18,
+      "to": 19,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 20,
+      "to": 21,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 21,
+      "to": 22,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 22,
+      "to": 23,
+      "weight": 127
+    },
+    {
+      "delay": 0,
+      "from": 23,
+      "to": 24,
+      "weight": 127
+    }
+  ],
+  "version": 0.4
+}
