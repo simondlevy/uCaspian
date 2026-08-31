@@ -153,68 +153,6 @@ ifeq ($(CXX), g++)
 endif
 
 #########################
-## Python support
-PYBUILD_FLAGS := $(shell python3 -m pybind11 --includes) -I$(INC) -I$(ROOT_INCLUDE) -I$(PYBINDINGS) -I$(ROOT)/$(PYBINDINGS) -std=c++14 $(FLTOFLAGS) -fPIC -O3 -fvisibility=hidden
-PYBUILD_LFLAGS = -shared
-
-ifeq ($(USB),true)
-    PYBUILD_FLAGS += -DWITH_USB
-    PYBUILD_LFLAGS += -lftdi1
-endif
-
-ifeq ($(VCASPIAN),true)
-    PYBUILD_FLAGS += -Iucaspian/sim/include -Iucaspian/vout -I/usr/local/share/verilator/include -I$(HOME)/oss-cad-suite/share/verilator/include -DWITH_VERILATOR
-endif
-
-# Patch symbol linkage issues for Mac OS
-OS := $(strip $(shell uname -s))
-
-ifeq ($(OS),Darwin)
-    PYBUILD_LFLAGS += -undefined dynamic_lookup
-endif
-
-python: $(PYLIBCASPIAN)
-
-BINDING_SOURCES := $(PYBINDINGS)/backend.cpp \
-                   $(PYBINDINGS)/network.cpp \
-		   $(PYBINDINGS)/bindings.cpp \
-		   $(PYBINDINGS)/processor.cpp \
-		   $(PYBINDINGS)/fast_infer.cpp
-
-BINDING_OBJECTS := $(patsubst $(PYBINDINGS)/%.cpp,$(PYBUILD_BINDINGS)/%.o,$(BINDING_SOURCES))
-
-PYBUILD_OBJECTS := $(patsubst $(SRC)/%.cpp,$(PYBUILD)/%.o,$(SOURCES)) \
-		   $(patsubst $(SRC)/%.cpp,$(PYBUILD)/%.o,$(TL_SOURCES))
-
-PYBUILD_TL_OBJECTS := $(wildcard $(ROOT)/$(PYBUILD)/*.o)
-
-$(BINDING_OBJECTS): $(PYBUILD_BINDINGS)/%.o : $(PYBINDINGS)/%.cpp $(HEADERS) $(TL_HEADERS) $(ROOT_INCLUDE)/framework.hpp | $(PYBUILD_BINDINGS)
-	$(CXX) $(PYBUILD_FLAGS) -c $< -o $@
-
-$(PYBUILD_OBJECTS): $(PYBUILD)/%.o : $(SRC)/%.cpp $(HEADERS) $(TL_HEADERS) $(ROOT_INCLUDE)/framework.hpp | $(PYBUILD)
-	$(CXX) $(PYBUILD_FLAGS) -c $< -o $@
-
-$(PYLIBCASPIAN): $(PYBUILD_OBJECTS) $(BINDING_OBJECTS) $(PYFRAMEWORK) $(V_OBJECTS)
-	$(CXX) $(PYBUILD_FLAGS) $(PYBUILD_OBJECTS) $(BINDING_OBJECTS) $(PYBUILD_TL_OBJECTS) $(V_OBJECTS) -o $@ $(PYBUILD_LFLAGS)
-
-#########################
-## Testing
-TEST_SRC  := $(wildcard $(TST)/*.cpp)
-TEST_OBJ  := $(patsubst $(TST)/%.cpp,$(OBJ)/%.o,$(TEST_SRC))
-TEST_EXEC  = $(BIN)/test
-
-$(TEST_OBJ): $(OBJ)/%.o : $(TST)/%.cpp $(HEADERS) $(TL_HEADERS) | $(OBJ)
-	$(CXX) $(CFLAGSBASE) -c $< -o $@
-
-$(TEST_EXEC): $(TEST_OBJ) $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
-	$(CXX) $(CFLAGSBASE) $(TEST_OBJ) -o $(TEST_EXEC) $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
-
-test: $(TEST_EXEC)
-
-run_test: $(TEST_EXEC)
-	$(VALGRIND) $(TEST_EXEC)
-
-#########################
 ## Utilities
 UTILITIES  = $(BIN)/json_example
 
