@@ -34,7 +34,7 @@ PYBUILD_SUFFIX := $(shell python3-config --extension-suffix || echo .cpython.so)
 VCASPIAN ?= false
 
 # FTDI USB support for uCaspian hardware
-USB ?= false
+USB ?= true
 
 # Framework Directories
 ROOT          = ../../../..
