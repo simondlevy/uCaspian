@@ -216,12 +216,7 @@ run_test: $(TEST_EXEC)
 
 #########################
 ## Utilities
-UTILITIES  = $(BIN)/pass_bench \
-             $(BIN)/all_to_all_bench \
-             $(BIN)/prune \
-             $(BIN)/echo \
-             $(BIN)/network_convert \
-             $(BIN)/json_example
+UTILITIES  = $(BIN)/json_example
 
 $(UTILITIES): $(BIN)/% : $(UTILS)/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
 	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
