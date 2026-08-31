@@ -123,7 +123,7 @@ You also need to be added to the `dialout` group.
     cd ..
     # In framework/processors/caspian
     make clean
-    make utils
+    make USB=true utils
     ./bin/pass_bench ucaspian 5 5 10
 
     ```
