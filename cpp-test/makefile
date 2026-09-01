@@ -28,10 +28,8 @@ PROJECT_DIR := $(dir $(MKFILE_PATH))
 
 # Compilation Flags
 CFLAGS ?= -Wall -Wextra -pipe -O3 -g
-CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE)
+CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE) -DWITH_USB
 LFLAGS = -lpthread -lftdi1
-
-CFLAGSBASE += -DWITH_USB
 
 ## Targets
 .PHONY: all clean test run_test python utils
