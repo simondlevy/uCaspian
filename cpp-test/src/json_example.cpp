@@ -45,8 +45,6 @@ int main()
     uint64_t outputs = 0;
     uint64_t active_cycles = 0;
 
-    std::vector<std::chrono::duration<double>> sim_times;
-
     for (int r = 0; r < runs; ++r) {
 
         auto sim_start = std::chrono::system_clock::now();
@@ -62,8 +60,6 @@ int main()
 
         std::chrono::duration<double> sim_time = sim_end - sim_start;
         printf("Simulate %4d: %lf s\n", r, sim_time.count());
-        //fmt::print("Simulate {:4d}: {} s\n", r, sim_time.count());
-        sim_times.push_back(sim_time);
 
         accumulations += proc->get_metric("accumulate_count");
         fires += proc->get_metric("fire_count");
