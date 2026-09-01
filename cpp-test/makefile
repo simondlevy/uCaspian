@@ -5,6 +5,7 @@
 #############################################################################
 
 # Directories
+TGT = bin/json_example
 INC = ../../include
 SRC = ../../src
 STATIC_OBJ=../../obj_static
@@ -29,10 +30,13 @@ STATIC_LIB=lib/libproc1.a
 $(LIBFRAMEWORK): $(ROOT_INCLUDE)/framework.hpp library
 	$(MAKE) -C $(ROOT)
 
-bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
+$(TGT) : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
 	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
 library: $(LIBRARY) $(STATIC_LIB)
+
+run: $(TGT)
+	./$(TGT)
 
 #########################
 ## Directories
