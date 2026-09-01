@@ -29,10 +29,10 @@ STATIC_LIB=lib/libproc1.a
 $(LIBFRAMEWORK): $(ROOT_INCLUDE)/framework.hpp library
 	$(MAKE) -C $(ROOT)
 
-library: $(LIBRARY) $(STATIC_LIB)
-
 bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
 	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
+
+library: $(LIBRARY) $(STATIC_LIB)
 
 #########################
 ## Directories
