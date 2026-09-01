@@ -18,13 +18,7 @@ OBJ = obj
 SRC = ../../src
 STATIC_OBJ=../../obj_static
 STATIC_SRC=../../src_static
-EO = eo
 UTILS = utils
-TST = test
-PYBINDINGS = bindings
-PYBUILD = build
-PYBUILD_BINDINGS = $(PYBUILD)/bindings
-PYBUILD_SUFFIX := $(shell python3-config --extension-suffix || echo .cpython.so)
 
 # Verilator support for uCaspian simulation
 VCASPIAN ?= false
@@ -59,14 +53,12 @@ endif
 all: $(LIB)/libcaspian.a library
 
 clean:
-	rm -rf $(BIN) $(OBJ) $(LIB) $(PYBUILD)
+	rm -rf $(BIN) $(OBJ) $(LIB)
 
 #########################
 ## Caspian library
 LIBCASPIAN = $(LIB)/libcaspian.a
 LIBFRAMEWORK = $(ROOT)/lib/libframework.a
-PYLIBCASPIAN = $(PYBUILD)/caspian$(PYBUILD_SUFFIX)
-PYFRAMEWORK  = $(ROOT)/build/neuro$(PYBUILD_SUFFIX)
 LIBRARY=$(LIB)/libproc2.a
 STATIC_LIB=$(LIB)/libproc1.a
 
@@ -75,13 +67,9 @@ $(LIBFRAMEWORK): $(ROOT_INCLUDE)/framework.hpp library
 
 library: $(LIBRARY) $(STATIC_LIB)
 
-
-$(PYFRAMEWORK):
-	$(MAKE) -C $(ROOT) python
-
 #########################
 ## Directories
-$(BIN) $(OBJ) $(LIB) $(PYBUILD) $(PYBUILD_BINDINGS):
+$(BIN) $(OBJ) $(LIB):
 	mkdir -p $@
 
 #########################
