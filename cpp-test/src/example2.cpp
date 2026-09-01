@@ -4,15 +4,9 @@
 
 int main()
 {
-    const std::string kNetworkFilename = "../networks/passnet.json";
+    const std::string kNetworkFilename = "../networks/example.txt";
 
-    const int kWidth = 5;
-    const int kHeight = 5;
-    const int kRuns = 10;
-
-    caspian::UsbCaspian proc;
-
-    auto net = caspian::Network(kWidth*kHeight);
+    caspian::Network net;
 
     // Read network from JSON file
     std::ifstream fin;
@@ -25,9 +19,11 @@ int main()
     fin >> j;
     net.from_json(j);
 
-    // Configure the simulator with the new network
+    // Configure the processor with the new network
+    caspian::UsbCaspian proc;
     proc.configure(&net);
 
+    /*
     for (size_t i = 0; i < net.num_outputs(); i++) {
         proc.track_timing(i);
     }
@@ -57,7 +53,7 @@ int main()
         }
 
         proc.clear_activity();
-    }
+    }*/
 
     return 0;
 }

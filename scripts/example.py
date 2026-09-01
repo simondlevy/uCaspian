@@ -12,20 +12,20 @@ except Exception:
     print('Unable to read from ' + NETWORK_FILE)
     exit(1)
 
-p = caspian.Processor({"Backend": "uCaspian_USB"})
+proc = caspian.Processor({"Backend": "uCaspian_USB"})
 
-p.load_network(net)
+proc.load_network(net)
 
-p.track_output_events(0)
-p.track_output_events(1)
+proc.track_output_events(0)
+proc.track_output_events(1)
 
 # Inputs
-p.apply_spike(neuro.Spike(time=0, id=0, value=1))
-p.apply_spike(neuro.Spike(time=5, id=0, value=1))
-p.apply_spike(neuro.Spike(time=10, id=0, value=1))
-p.apply_spike(neuro.Spike(time=20, id=0, value=1))
+proc.apply_spike(neuro.Spike(time=0, id=0, value=1))
+proc.apply_spike(neuro.Spike(time=5, id=0, value=1))
+proc.apply_spike(neuro.Spike(time=10, id=0, value=1))
+proc.apply_spike(neuro.Spike(time=20, id=0, value=1))
 
-p.run(50)
+proc.run(50)
 
-print(0, p.output_vector(0))
-print(1, p.output_vector(1))
+print(0, proc.output_vector(0))
+print(1, proc.output_vector(1))
