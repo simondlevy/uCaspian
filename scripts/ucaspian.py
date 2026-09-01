@@ -1,7 +1,6 @@
 import caspian
 import serial
 
-
 class HardwareNeuron:
 
     def __init__(self, nid, threshold, leak=-1, is_output=False):
