@@ -31,6 +31,9 @@ $(LIBFRAMEWORK): $(ROOT_INCLUDE)/framework.hpp library
 
 library: $(LIBRARY) $(STATIC_LIB)
 
+bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
+	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
+
 #########################
 ## Directories
 bin obj lib:
@@ -81,9 +84,6 @@ $(STATIC_LIB): $(STATIC_OBJ)/static_proc.o
 
 $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 	g++ $(CFLAGSBASE) -c $(STATIC_SRC)/static_proc.cpp -o $@
-
-bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
-	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
 clean:
 	rm -rf bin obj lib
