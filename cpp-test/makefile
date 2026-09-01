@@ -4,14 +4,10 @@
 #############################################################################
 
 # Applications
-SH ?= bash
 CC ?= gcc
 CXX ?= g++
 AR ?= ar
 RANLIB ?= ranlib
-PYTHON ?= python3
-PIP ?= $(PYTHON) -m pip
-VALGRIND ?= valgrind
 
 # Directories
 BIN = bin
