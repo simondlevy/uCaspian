@@ -5,10 +5,7 @@
 #############################################################################
 
 # Directories
-BIN = bin
 INC = ../../include
-LIB = lib
-OBJ = obj
 SRC = ../../src
 STATIC_OBJ=../../obj_static
 STATIC_SRC=../../src_static
@@ -24,10 +21,10 @@ LFLAGS = -lpthread -lftdi1
 
 #########################
 ## Caspian library
-LIBCASPIAN = $(LIB)/libcaspian.a
+LIBCASPIAN = lib/libcaspian.a
 LIBFRAMEWORK = $(ROOT)/lib/libframework.a
-LIBRARY=$(LIB)/libproc2.a
-STATIC_LIB=$(LIB)/libproc1.a
+LIBRARY=lib/libproc2.a
+STATIC_LIB=lib/libproc1.a
 
 $(LIBFRAMEWORK): $(ROOT_INCLUDE)/framework.hpp library
 	$(MAKE) -C $(ROOT)
@@ -36,7 +33,7 @@ library: $(LIBRARY) $(STATIC_LIB)
 
 #########################
 ## Directories
-$(BIN) $(OBJ) $(LIB):
+bin obj lib:
 	mkdir -p $@
 
 #########################
@@ -59,17 +56,17 @@ TL_SOURCES  = $(SRC)/processor.cpp \
 SOURCES += $(SRC)/ucaspian.cpp
 LFLAGS += -lftdi1
 
-OBJECTS    := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SOURCES))
-TL_OBJECTS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(TL_SOURCES))
+OBJECTS    := $(patsubst $(SRC)/%.cpp,obj/%.o,$(SOURCES))
+TL_OBJECTS := $(patsubst $(SRC)/%.cpp,obj/%.o,$(TL_SOURCES))
 
-$(OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) | $(OBJ)
+$(OBJECTS): obj/%.o : $(SRC)/%.cpp $(HEADERS) | obj
 	g++ $(CFLAGSBASE) -c $< -o $@
 
-$(TL_OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) $(TL_HEADERS) \
-	$(ROOT_INCLUDE)/framework.hpp | $(OBJ)
+$(TL_OBJECTS): obj/%.o : $(SRC)/%.cpp $(HEADERS) $(TL_HEADERS) \
+	$(ROOT_INCLUDE)/framework.hpp | obj
 	g++ $(CFLAGSBASE) -c $< -o $@
 
-$(LIBCASPIAN): $(OBJECTS) $(TL_OBJECTS) $(V_OBJECTS) | $(LIB)
+$(LIBCASPIAN): $(OBJECTS) $(TL_OBJECTS) $(V_OBJECTS) | lib
 	ar r $@ $^
 	ranlib $@
 
@@ -85,9 +82,9 @@ $(STATIC_LIB): $(STATIC_OBJ)/static_proc.o
 $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 	g++ $(CFLAGSBASE) -c $(STATIC_SRC)/static_proc.cpp -o $@
 
-bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
+bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
 	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
 clean:
-	rm -rf $(BIN) $(OBJ) $(LIB)
+	rm -rf bin obj lib
 
