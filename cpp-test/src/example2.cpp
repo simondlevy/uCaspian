@@ -4,7 +4,7 @@
 
 int main()
 {
-    const std::string kNetworkFilename = "networks/passnet.json";
+    const std::string kNetworkFilename = "../networks/passnet.json";
 
     const int kWidth = 5;
     const int kHeight = 5;
