@@ -94,6 +94,10 @@ $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 ## Utilities
 UTILITIES  = $(BIN)/json_example
 
+$(BIN)/json_example% : src/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
+	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
+
+
 $(UTILITIES): $(BIN)/% : src/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
 	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
