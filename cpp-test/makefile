@@ -1,13 +1,8 @@
 #############################################################################
 # CASPIAN - A Programmable Neuromorphic Computing Architecture
 # Parker Mitchell, 2019
+# Simon D. Levy, 2026
 #############################################################################
-
-# Applications
-CC ?= gcc
-CXX ?= g++
-AR ?= ar
-RANLIB ?= ranlib
 
 # Directories
 BIN = bin
@@ -68,15 +63,15 @@ OBJECTS    := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SOURCES))
 TL_OBJECTS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(TL_SOURCES))
 
 $(OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) | $(OBJ)
-	$(CXX) $(CFLAGSBASE) -c $< -o $@
+	g++ $(CFLAGSBASE) -c $< -o $@
 
 $(TL_OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) $(TL_HEADERS) \
 	$(ROOT_INCLUDE)/framework.hpp | $(OBJ)
-	$(CXX) $(CFLAGSBASE) -c $< -o $@
+	g++ $(CFLAGSBASE) -c $< -o $@
 
 $(LIBCASPIAN): $(OBJECTS) $(TL_OBJECTS) $(V_OBJECTS) | $(LIB)
-	$(AR) r $@ $^
-	$(RANLIB) $@
+	ar r $@ $^
+	ranlib $@
 
 $(LIBRARY): obj/network.o obj/network_conversion.o obj/processor.o obj/simulator.o
 	ar r $(LIBRARY) obj/network.o obj/network_conversion.o \
@@ -88,16 +83,11 @@ $(STATIC_LIB): $(STATIC_OBJ)/static_proc.o
 	ranlib $(STATIC_LIB)
 
 $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
-	$(CC) $(CFLAGSBASE) -c $(STATIC_SRC)/static_proc.cpp -o $@
+	g++ $(CFLAGSBASE) -c $(STATIC_SRC)/static_proc.cpp -o $@
 
-#########################
+bin/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
+	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
-$(BIN)/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
-	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
-
-
-#########################
-## Cleanup
 clean:
 	rm -rf $(BIN) $(OBJ) $(LIB)
 
