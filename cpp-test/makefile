@@ -27,9 +27,6 @@ CFLAGS ?= -Wall -Wextra -pipe -O3 -g
 CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE) -DWITH_USB
 LFLAGS = -lpthread -lftdi1
 
-clean:
-	rm -rf $(BIN) $(OBJ) $(LIB)
-
 #########################
 ## Caspian library
 LIBCASPIAN = $(LIB)/libcaspian.a
@@ -73,7 +70,8 @@ TL_OBJECTS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(TL_SOURCES))
 $(OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) | $(OBJ)
 	$(CXX) $(CFLAGSBASE) -c $< -o $@
 
-$(TL_OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) $(TL_HEADERS) $(ROOT_INCLUDE)/framework.hpp | $(OBJ)
+$(TL_OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp $(HEADERS) $(TL_HEADERS) \
+	$(ROOT_INCLUDE)/framework.hpp | $(OBJ)
 	$(CXX) $(CFLAGSBASE) -c $< -o $@
 
 $(LIBCASPIAN): $(OBJECTS) $(TL_OBJECTS) $(V_OBJECTS) | $(LIB)
@@ -81,7 +79,8 @@ $(LIBCASPIAN): $(OBJECTS) $(TL_OBJECTS) $(V_OBJECTS) | $(LIB)
 	$(RANLIB) $@
 
 $(LIBRARY): obj/network.o obj/network_conversion.o obj/processor.o obj/simulator.o
-	ar r $(LIBRARY) obj/network.o obj/network_conversion.o obj/processor.o obj/simulator.o
+	ar r $(LIBRARY) obj/network.o obj/network_conversion.o \
+		obj/processor.o obj/simulator.o
 	ranlib $(LIBRARY)
 
 $(STATIC_LIB): $(STATIC_OBJ)/static_proc.o
@@ -95,7 +94,13 @@ $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 ## Utilities
 UTILITIES  = $(BIN)/json_example
 
-$(UTILITIES): $(BIN)/% : utils/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
+$(UTILITIES): $(BIN)/% : src/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
 	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
 utils: $(UTILITIES)
+
+#########################
+## Cleanup
+clean:
+	rm -rf $(BIN) $(OBJ) $(LIB)
+
