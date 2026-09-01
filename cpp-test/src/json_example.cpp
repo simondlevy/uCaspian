@@ -12,9 +12,9 @@ int main()
 
     caspian::UsbCaspian proc;
 
+    auto net = caspian::Network(kWidth*kHeight);
+
     // Read network from JSON file
-    auto net = std::make_unique<caspian::Network>(kWidth*kHeight);
-    auto netptr = net.get();
     std::ifstream fin;
     fin.open(kNetworkFilename.c_str());
     if (fin.fail()) {
@@ -23,12 +23,12 @@ int main()
     }
     nlohmann::json j;
     fin >> j;
-    netptr->from_json(j);
+    net.from_json(j);
 
     // Configure the simulator with the new network
-    proc.configure(netptr);
+    proc.configure(&net);
 
-    for (size_t i = 0; i < net->num_outputs(); i++) {
+    for (size_t i = 0; i < net.num_outputs(); i++) {
         proc.track_timing(i);
     }
 
