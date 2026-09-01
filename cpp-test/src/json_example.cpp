@@ -10,7 +10,7 @@ int main()
     const int kHeight = 5;
     const int kRuns = 10;
 
-    std::unique_ptr<caspian::Backend> proc = std::make_unique<caspian::UsbCaspian>(false);
+    caspian::UsbCaspian proc;
 
     // Read network from JSON file
     auto net = std::make_unique<caspian::Network>(kWidth*kHeight);
@@ -26,10 +26,10 @@ int main()
     netptr->from_json(j);
 
     // Configure the simulator with the new network
-    proc->configure(netptr);
+    proc.configure(netptr);
 
     for (size_t i = 0; i < net->num_outputs(); i++) {
-        proc->track_timing(i);
+        proc.track_timing(i);
     }
 
     const auto cycles = 3*kWidth + 2*kHeight;
@@ -38,25 +38,25 @@ int main()
 
         // Queue up inputs
         for (int i = 0; i < kHeight; ++i) {
-            proc->apply_input(i, 255, i);
+            proc.apply_input(i, 255, i);
         }
 
         // Simulate with sufficient time
-        proc->simulate(cycles);
+        proc.simulate(cycles);
 
         printf("Simulate %4d\n", r);
 
         for (int i=0; i<kHeight; ++i) {
-            printf("Output %d (%d):", i, proc->get_output_count(i));
-            //fmt::print("Output {} ({}):", i, proc->get_output_count(i));
-            auto outs = proc->get_output_values(i);
+            printf("Output %d (%d):", i, proc.get_output_count(i));
+            //fmt::print("Output {} ({}):", i, proc.get_output_count(i));
+            auto outs = proc.get_output_values(i);
             for (auto o : outs) {
                 printf(" %u", o);
             }
             printf("\n");
         }
 
-        proc->clear_activity();
+        proc.clear_activity();
     }
 
     return 0;
