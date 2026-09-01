@@ -23,16 +23,12 @@ UTILS = utils
 ROOT          = ../../../..
 ROOT_INCLUDE  = $(ROOT)/include
 
-MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
-PROJECT_DIR := $(dir $(MKFILE_PATH))
-
 # Compilation Flags
 CFLAGS ?= -Wall -Wextra -pipe -O3 -g
 CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE) -DWITH_USB
 LFLAGS = -lpthread -lftdi1
 
 ## Targets
-.PHONY: all clean test run_test python utils
 all: $(LIB)/libcaspian.a library
 
 clean:
