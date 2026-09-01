@@ -91,17 +91,10 @@ $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 	$(CC) $(CFLAGSBASE) -c $(STATIC_SRC)/static_proc.cpp -o $@
 
 #########################
-## Utilities
-UTILITIES  = $(BIN)/json_example
 
-$(BIN)/json_example% : src/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
+$(BIN)/json_example : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
 	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
-
-$(UTILITIES): $(BIN)/% : src/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
-	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
-
-utils: $(UTILITIES)
 
 #########################
 ## Cleanup
