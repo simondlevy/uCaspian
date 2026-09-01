@@ -36,13 +36,8 @@ int main()
     auto cfg_end = std::chrono::system_clock::now();
 
     int cycles = 3*w + 2*h;
-    printf("Width: %d Height: %d Cycles: %d\n", w, h, cycles);
-    printf("Neurons: %zu Synapses: %zu\n", net->num_neurons(), net->num_synapses());
-    printf("Configuration Time: %lf us\n", (cfg_end - cfg_start).count() / 1000.0);
 
     for (int r = 0; r < runs; ++r) {
-
-        auto sim_start = std::chrono::system_clock::now();
 
         // Queue up inputs
         for (int i = 0; i < h; ++i) {
@@ -51,10 +46,8 @@ int main()
 
         // Simulate with sufficient time
         proc->simulate(cycles);
-        auto sim_end = std::chrono::system_clock::now();
 
-        std::chrono::duration<double> sim_time = sim_end - sim_start;
-        printf("Simulate %4d: %lf s\n", r, sim_time.count());
+        printf("Simulate %4d\n", r);
 
         for (int i = 0; i < h; ++i) {
             printf("Output %d (%d):", i, proc->get_output_count(i));
