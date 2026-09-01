@@ -5,7 +5,8 @@
 #############################################################################
 
 # Directories
-TGT = bin/json_example
+TGT1 = bin/example1
+TGT2 = bin/example2
 INC = ../../include
 SRC = ../../src
 STATIC_OBJ=../../obj_static
@@ -30,13 +31,19 @@ STATIC_LIB=lib/libproc1.a
 $(LIBFRAMEWORK): $(ROOT_INCLUDE)/framework.hpp library
 	$(MAKE) -C $(ROOT)
 
-$(TGT) : src/json_example.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
+$(TGT1) : src/example1.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
+	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
+
+$(TGT2) : src/example2.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | bin
 	g++ $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
 library: $(LIBRARY) $(STATIC_LIB)
 
-run: $(TGT)
-	./$(TGT)
+run1: $(TGT1)
+	./$(TGT1)
+
+run2: $(TGT2)
+	./$(TGT2)
 
 #########################
 ## Directories
@@ -93,4 +100,4 @@ clean:
 	rm -rf bin obj lib
 
 edit:
-	vim src/json_example.cpp
+	vim src/example1.cpp
