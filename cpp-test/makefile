@@ -52,9 +52,9 @@ $(BIN) $(OBJ) $(LIB):
 ## Sources
 HEADERS     = $(INC)/backend.hpp \
               $(INC)/constants.hpp \
-	      $(INC)/network.hpp \
-	      $(INC)/simulator.hpp \
-	      $(INC)/ucaspian.hpp
+   	          $(INC)/network.hpp \
+	          $(INC)/simulator.hpp \
+	          $(INC)/ucaspian.hpp
 
 TL_HEADERS  = $(INC)/processor.hpp \
               $(INC)/network_conversion.hpp
@@ -91,19 +91,6 @@ $(STATIC_LIB): $(STATIC_OBJ)/static_proc.o
 
 $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 	$(CC) $(CFLAGSBASE) -c $(STATIC_SRC)/static_proc.cpp -o $@
-
-## flto flag compiler version specific fix.
-# '-flto=auto' introduced since GCC 10.1:
-# * https://gcc.gnu.org/onlinedocs/gcc-9.5.0/gcc/Optimize-Options.html#Optimize-Options (no)
-# * https://gcc.gnu.org/onlinedocs/gcc-10.1.0/gcc/Optimize-Options.html#Optimize-Options (yes)
-# Since GCC 12.1, the abundance of a parameter produces a warning if compiling multiple targets.
-FLTOFLAGS = 
-ifeq ($(CXX), g++)
-	CXXMAJORVERSION = $(shell g++ --version | grep ^g++ | sed 's/^.* //g' | sed 's/\..*//')
-	ifeq ($(shell test $(CXXMAJORVERSION) -ge 10; echo $$?),0)
-		FLTOFLAGS = -flto=auto
-	endif
-endif
 
 #########################
 ## Utilities
