@@ -40,11 +40,6 @@ int main()
     printf("Neurons: %zu Synapses: %zu\n", net->num_neurons(), net->num_synapses());
     printf("Configuration Time: %lf us\n", (cfg_end - cfg_start).count() / 1000.0);
 
-    uint64_t accumulations = 0;
-    uint64_t fires = 0;
-    uint64_t outputs = 0;
-    uint64_t active_cycles = 0;
-
     for (int r = 0; r < runs; ++r) {
 
         auto sim_start = std::chrono::system_clock::now();
@@ -61,10 +56,6 @@ int main()
         std::chrono::duration<double> sim_time = sim_end - sim_start;
         printf("Simulate %4d: %lf s\n", r, sim_time.count());
 
-        accumulations += proc->get_metric("accumulate_count");
-        fires += proc->get_metric("fire_count");
-        active_cycles += proc->get_metric("active_clock_cycles");
-
         for (int i = 0; i < h; ++i) {
             printf("Output %d (%d):", i, proc->get_output_count(i));
             //fmt::print("Output {} ({}):", i, proc->get_output_count(i));
@@ -73,7 +64,6 @@ int main()
                 printf(" %u", o);
             }
             printf("\n");
-            outputs += proc->get_output_count(i);
         }
 
         proc->clear_activity();
