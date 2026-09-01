@@ -92,3 +92,5 @@ $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 clean:
 	rm -rf bin obj lib
 
+edit:
+	vim src/json_example.cpp
