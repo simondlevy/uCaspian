@@ -17,7 +17,6 @@ OBJ = obj
 SRC = ../../src
 STATIC_OBJ=../../obj_static
 STATIC_SRC=../../src_static
-UTILS = utils
 
 # Framework Directories
 ROOT          = ../../../..
@@ -96,7 +95,7 @@ $(STATIC_OBJ)/static_proc.o: $(STATIC_SRC)/static_proc.cpp
 ## Utilities
 UTILITIES  = $(BIN)/json_example
 
-$(UTILITIES): $(BIN)/% : $(UTILS)/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
+$(UTILITIES): $(BIN)/% : utils/%.cpp $(LIBCASPIAN) $(LIBFRAMEWORK) | $(BIN)
 	$(CXX) $(CFLAGSBASE) $< -o $@ $(LIBCASPIAN) $(LIBFRAMEWORK) $(LFLAGS)
 
 utils: $(UTILITIES)
