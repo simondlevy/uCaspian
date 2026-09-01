@@ -11,7 +11,6 @@ RANLIB ?= ranlib
 
 # Directories
 BIN = bin
-DOCS = docs
 INC = ../../include
 LIB = lib
 OBJ = obj
@@ -19,9 +18,6 @@ SRC = ../../src
 STATIC_OBJ=../../obj_static
 STATIC_SRC=../../src_static
 UTILS = utils
-
-# Verilator support for uCaspian simulation
-VCASPIAN ?= false
 
 # FTDI USB support for uCaspian hardware
 USB ?= true
@@ -37,12 +33,6 @@ PROJECT_DIR := $(dir $(MKFILE_PATH))
 CFLAGS ?= -Wall -Wextra -pipe -O3 -g
 CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE)
 LFLAGS = -lpthread -lftdi1
-
-ifeq ($(VCASPIAN),true)
-    CFLAGSBASE += -DWITH_VERILATOR
-    CFLAGSBASE += -Iucaspian/sim/include -Iucaspian/vout -I/usr/local/share/verilator/include -I$(HOME)/oss-cad-suite/share/verilator/include
-    LFLAGS += -lz
-endif
 
 ifeq ($(USB),true)
     CFLAGSBASE += -DWITH_USB
@@ -92,11 +82,6 @@ TL_SOURCES  = $(SRC)/processor.cpp \
 ifeq ($(USB),true)
     SOURCES += $(SRC)/ucaspian.cpp
     LFLAGS += -lftdi1
-endif
-
-ifeq ($(VCASPIAN),true)
-    SOURCES += $(SRC)/verilator_caspian.cpp
-    V_OBJECTS := $(wildcard ucaspian/vout/V*.o) ucaspian/vout/verilated.o ucaspian/vout/verilated_fst_c.o
 endif
 
 OBJECTS    := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SOURCES))
