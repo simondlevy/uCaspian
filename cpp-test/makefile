@@ -28,9 +28,6 @@ CFLAGS ?= -Wall -Wextra -pipe -O3 -g
 CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE) -DWITH_USB
 LFLAGS = -lpthread -lftdi1
 
-## Targets
-all: $(LIB)/libcaspian.a library
-
 clean:
 	rm -rf $(BIN) $(OBJ) $(LIB)
 
