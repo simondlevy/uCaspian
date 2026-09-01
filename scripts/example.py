@@ -2,7 +2,7 @@
 import neuro
 import caspian
 
-NETWORK_FILE = "example.txt"
+NETWORK_FILE = "../networks/example.txt"
 
 net = neuro.Network()
 
