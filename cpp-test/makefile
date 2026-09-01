@@ -19,9 +19,6 @@ STATIC_OBJ=../../obj_static
 STATIC_SRC=../../src_static
 UTILS = utils
 
-# FTDI USB support for uCaspian hardware
-USB ?= true
-
 # Framework Directories
 ROOT          = ../../../..
 ROOT_INCLUDE  = $(ROOT)/include
@@ -34,9 +31,7 @@ CFLAGS ?= -Wall -Wextra -pipe -O3 -g
 CFLAGSBASE = $(CFLAGS) -std=c++14 -I$(INC) -I$(ROOT_INCLUDE)
 LFLAGS = -lpthread -lftdi1
 
-ifeq ($(USB),true)
-    CFLAGSBASE += -DWITH_USB
-endif
+CFLAGSBASE += -DWITH_USB
 
 ## Targets
 .PHONY: all clean test run_test python utils
@@ -79,10 +74,8 @@ SOURCES     = $(SRC)/network.cpp \
 TL_SOURCES  = $(SRC)/processor.cpp \
               $(SRC)/network_conversion.cpp
 
-ifeq ($(USB),true)
-    SOURCES += $(SRC)/ucaspian.cpp
-    LFLAGS += -lftdi1
-endif
+SOURCES += $(SRC)/ucaspian.cpp
+LFLAGS += -lftdi1
 
 OBJECTS    := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SOURCES))
 TL_OBJECTS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(TL_SOURCES))
