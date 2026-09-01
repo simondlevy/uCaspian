@@ -6,14 +6,14 @@ int main()
 {
     const std::string kNetworkFilename = "networks/passnet.json";
 
-    const int w = 5;
-    const int h = 5;
-    const int runs = 10;
+    const int kWidth = 5;
+    const int kHeight = 5;
+    const int kRuns = 10;
 
     std::unique_ptr<caspian::Backend> proc = std::make_unique<caspian::UsbCaspian>(false);
 
     // Read network from JSON file
-    auto net = std::make_unique<caspian::Network>(w*h);
+    auto net = std::make_unique<caspian::Network>(kWidth*kHeight);
     auto netptr = net.get();
     std::ifstream fin;
     fin.open(kNetworkFilename.c_str());
@@ -26,21 +26,18 @@ int main()
     netptr->from_json(j);
 
     // Configure the simulator with the new network
-    auto cfg_start = std::chrono::system_clock::now();
     proc->configure(netptr);
 
     for (size_t i = 0; i < net->num_outputs(); i++) {
         proc->track_timing(i);
     }
 
-    auto cfg_end = std::chrono::system_clock::now();
+    const auto cycles = 3*kWidth + 2*kHeight;
 
-    int cycles = 3*w + 2*h;
-
-    for (int r = 0; r < runs; ++r) {
+    for (int r=0; r<kRuns; ++r) {
 
         // Queue up inputs
-        for (int i = 0; i < h; ++i) {
+        for (int i = 0; i < kHeight; ++i) {
             proc->apply_input(i, 255, i);
         }
 
@@ -49,7 +46,7 @@ int main()
 
         printf("Simulate %4d\n", r);
 
-        for (int i = 0; i < h; ++i) {
+        for (int i=0; i<kHeight; ++i) {
             printf("Output %d (%d):", i, proc->get_output_count(i));
             //fmt::print("Output {} ({}):", i, proc->get_output_count(i));
             auto outs = proc->get_output_values(i);
