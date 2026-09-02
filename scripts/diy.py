@@ -4,32 +4,24 @@ from time import sleep
 
 ser = serial.Serial('/dev/ttyUSB0', 3_000_000)
 
-ser.write(b'\x05')
+def send_and_read(data):
 
-while ser.in_waiting < 1:
-    pass
+    for b in data:
+        print('send ', b)
+        ser.write(b)
 
-print(ser.read(1))
+    while ser.in_waiting < 1:
+        pass
 
-for byte in (b'\x08', b'\x00', b'\x0A', b'\xF8', b'\x00', b'\x00', b'\x01',
-             b'\x10', b'\x00', b'\x00', b'\x0B', b'\x01', b'\x08', b'\x01',
-             b'\x0A', b'\x08', b'\x00', b'\x01', b'\x00'):
-    ser.write(byte)
+    print('receive: ', ser.read(ser.in_waiting))
 
-while ser.in_waiting < 1:
-    pass
+send_and_read([b'\x05'])
 
-print(ser.read(ser.in_waiting))
-
+send_and_read([b'\x08', b'\x00', b'\x0A', b'\xF8', b'\x00', b'\x00', b'\x01',
+               b'\x10', b'\x00', b'\x00', b'\x0B', b'\x01', b'\x08', b'\x01',
+               b'\x0A', b'\x08', b'\x00', b'\x01', b'\x00'])
 
 '''
-Send config for 3 elements with 19 bytes
- < Async write of 19 bytes -- offset: 0 -- total: 19
-Enter parse_cmds -- buf size: 3
- > Config Ack 1
- > Config Ack 2
- > Config Ack 3
-[TIME: 0] Processed 3 bytes: [ x18 x18 x18 ]  - 0 leftover
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> clear_activity: dev=0x5ae0d6296df0
 +++++++++++++++++++++++ clear_activity()
  < Async write of 1 bytes -- offset: 0 -- total: 1
