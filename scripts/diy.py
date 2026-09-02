@@ -4,7 +4,7 @@ from time import sleep
 
 ser = serial.Serial('/dev/ttyUSB0', 3_000_000)
 
-ser.write(b'\x04')
+ser.write(b'\x05')
 
 while ser.in_waiting < 1:
     pass
