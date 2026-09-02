@@ -6,22 +6,24 @@ ser = serial.Serial('/dev/ttyUSB0', 3_000_000)
 
 def send_and_read(data):
 
-    for b in data:
-        print('send ', b)
-        ser.write(b)
+    ser.write(bytes(data))
 
     while ser.in_waiting < 1:
         pass
 
     print('receive: ', ser.read(ser.in_waiting))
 
+
+send_and_read([5])
+
+
+'''
 send_and_read([b'\x05'])
 
 send_and_read([b'\x08', b'\x00', b'\x0A', b'\xF8', b'\x00', b'\x00', b'\x01',
                b'\x10', b'\x00', b'\x00', b'\x0B', b'\x01', b'\x08', b'\x01',
                b'\x0A', b'\x08', b'\x00', b'\x01', b'\x00'])
 
-'''
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> clear_activity: dev=0x5ae0d6296df0
 +++++++++++++++++++++++ clear_activity()
  < Async write of 1 bytes -- offset: 0 -- total: 1
