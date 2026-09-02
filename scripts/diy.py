@@ -6,9 +6,11 @@ ser = serial.Serial('/dev/ttyUSB0', 3_000_000)
 
 ser.write(b'\x04')
 
-sleep(1)
+sleep(.125)
 
 print(ser.in_waiting)
+
+print(ser.read(1))
 
 
 '''
