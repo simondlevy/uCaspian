@@ -16,14 +16,12 @@ def send_and_read(data):
 
 send_and_read([5])
 
+send_and_read([0x08, 0x00, 0x0A, 0xF8, 0x00, 0x00, 0x01,
+               0x10, 0x00, 0x00, 0x0B, 0x01, 0x08, 0x01,
+               0x0A, 0x08, 0x00, 0x01, 0x00])
+
 
 '''
-send_and_read([b'\x05'])
-
-send_and_read([b'\x08', b'\x00', b'\x0A', b'\xF8', b'\x00', b'\x00', b'\x01',
-               b'\x10', b'\x00', b'\x00', b'\x0B', b'\x01', b'\x08', b'\x01',
-               b'\x0A', b'\x08', b'\x00', b'\x01', b'\x00'])
-
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> clear_activity: dev=0x5ae0d6296df0
 +++++++++++++++++++++++ clear_activity()
  < Async write of 1 bytes -- offset: 0 -- total: 1
