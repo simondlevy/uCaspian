@@ -11,35 +11,19 @@ while ser.in_waiting < 1:
 
 print(ser.read(1))
 
+for byte in (b'\x08', b'\x00', b'\x0A', b'\xF8', b'\x00', b'\x00', b'\x01',
+             b'\x10', b'\x00', b'\x00', b'\x0B', b'\x01', b'\x08', b'\x01',
+             b'\x0A', b'\x08', b'\x00', b'\x01', b'\x00'):
+    ser.write(byte)
+
+while ser.in_waiting < 1:
+    pass
+
+print(ser.in_waiting)
 
 '''
-Preparing to send clear config... < Async write of 1 bytes -- offset: 0 -- total: 1
-  x05 = 5
-Enter parse_cmds -- buf size: 1
- > Clear Ack 1
-[TIME: 0] Processed 1 bytes: [ x04 ]  - 0 leftover
- Clear ack'd
 Send config for 3 elements with 19 bytes
  < Async write of 19 bytes -- offset: 0 -- total: 19
-  x08 = 8
-  x00 = 0
-  x0A = 10
-  xF8 = 248
-  x00 = 0
-  x00 = 0
-  x01 = 1
-  x10 = 16
-  x00 = 0
-  x00 = 0
-  x0B = 11
-  x01 = 1
-  x08 = 8
-  x01 = 1
-  x0A = 10
-  x08 = 8
-  x00 = 0
-  x01 = 1
-  x00 = 0
 Enter parse_cmds -- buf size: 3
  > Config Ack 1
  > Config Ack 2
