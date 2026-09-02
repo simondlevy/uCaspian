@@ -16,10 +16,7 @@ def send_and_read(data):
 
 send_and_read([5])
 
-send_and_read([0x08, 0x00, 0x0A, 0xF8, 0x00, 0x00, 0x01,
-               0x10, 0x00, 0x00, 0x0B, 0x01, 0x08, 0x01,
-               0x0A, 0x08, 0x00, 0x01, 0x00])
-
+send_and_read([8, 0, 10, 248, 0, 0, 1, 16, 0, 0, 11, 1, 8, 1, 10, 8, 0, 1, 0])
 
 '''
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> clear_activity: dev=0x5ae0d6296df0
