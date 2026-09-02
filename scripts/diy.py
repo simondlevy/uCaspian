@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 import serial
+from time import sleep
 
 ser = serial.Serial('/dev/ttyUSB0', 3_000_000)
+
+ser.write(b'\x04')
+
+sleep(1)
+
+print(ser.in_waiting)
+
 
 '''
 Preparing to send clear config... < Async write of 1 bytes -- offset: 0 -- total: 1
