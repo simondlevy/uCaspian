@@ -2,7 +2,7 @@
 import neuro
 import caspian
 
-NETWORK_FILE = "../../networks/example.txt"
+NETWORK_FILE = '../networks/example.txt'
 
 net = neuro.Network()
 
@@ -12,11 +12,11 @@ except Exception:
     print('Unable to read from ' + NETWORK_FILE)
     exit(1)
 
-proc = caspian.Processor({"Backend": "uCaspian_USB"})
+proc = caspian.Processor({'Backend': 'uCaspian_USB'})
 
 proc.load_network(net)
 
-###########################################################
+print('======================================================================')
 
 proc.clear_activity()
 
