@@ -2,13 +2,12 @@
 import serial
 from time import sleep
 
-DELAY_SEC = 0.01
-
 ser = serial.Serial('/dev/ttyUSB0', 3_000_000)
 
 ser.write(b'\x04')
 
-sleep(DELAY_SEC)
+while ser.in_waiting < 1:
+    pass
 
 print(ser.read(1))
 
