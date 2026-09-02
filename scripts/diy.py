@@ -19,7 +19,8 @@ for byte in (b'\x08', b'\x00', b'\x0A', b'\xF8', b'\x00', b'\x00', b'\x01',
 while ser.in_waiting < 1:
     pass
 
-print(ser.in_waiting)
+print(ser.read(ser.in_waiting))
+
 
 '''
 Send config for 3 elements with 19 bytes
